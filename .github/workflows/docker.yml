@@ -35,6 +35,7 @@ jobs:
     permissions:
       packages: write
       contents: read
+    needs: push_to_registries
     steps:
       - name: Docker run
         run: docker run ghcr.io/danknil/chepuha:1.0
