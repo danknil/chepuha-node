@@ -29,5 +29,25 @@ jobs:
       - name: Docker push
         run: docker push ghcr.io/danknil/chepuha:1.0
 
+  run_and_notify:
+    name: Build, Run and send to telegram
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
       - name: Docker run
         run: docker run ghcr.io/danknil/chepuha:1.0
+
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.641571856 }}
+          token: ${{ secrets.6073683912:AAHIwUpmavmJzQElJ5zaYVA7tID9xvr9bQM }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+                  
+            Repository: ${{ github.repository }}
+                  
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
