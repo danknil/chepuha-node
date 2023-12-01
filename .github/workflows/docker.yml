@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker build
-        run: docker build ghcr.io/danknil/chepuha:1.0
+        run: docker build -t ghcr.io/danknil/chepuha:1.0 .
 
       - name: Docker push
         run: docker push ghcr.io/danknil/chepuha:1.0
